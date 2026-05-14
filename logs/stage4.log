@@ -1,0 +1,63 @@
+======================================================================
+STAGE 4: Multi-Agent System (In-Process)
+======================================================================
+
+[How it works]
+  1. Lead attorney agent analyses the question
+  2. Router decides which specialist agents are needed
+  3. Tax + Compliance specialists run IN PARALLEL (LangGraph Send API)
+  4. Aggregator combines all analyses into a final answer
+
+[Graph topology]
+  analyze_law -> check_routing -> [call_tax + call_compliance] -> aggregate -> END
+
+Question: If a company breaks a contract and avoids taxes, what are the legal and regulatory consequences?
+----------------------------------------------------------------------
+
+  [Node: analyze_law] Lead attorney analysing legal aspects...
+  [Node: analyze_law] Done (230 chars)
+
+  [Node: check_routing] Determining which specialists are needed...
+  [Node: check_routing] needs_tax=True, needs_compliance=False, needs_privacy=True
+
+  [Node: call_tax_specialist] Tax specialist agent starting...
+
+  [Node: call_privacy_specialist] Privacy specialist agent starting...
+  [Node: call_tax_specialist] Done (230 chars)
+  [Node: call_privacy_specialist] Done (230 chars)
+
+  [Node: aggregate] Combining all specialist analyses...
+  [Node: aggregate] Done (319 chars)
+
+======================================================================
+FINAL ANSWER
+======================================================================
+Contract risk: possible compensatory damages, consequential damages, and injunctive relief.
+Tax risk: potential back taxes, civil penalties, and criminal exposure in serious cases.
+Privacy risk: administrative fines, data-subject claims, and breach-notification duties.
+Note: educational content only, not legal advice.
+
+----------------------------------------------------------------------
+[Improvements over Stage 3]
+  + Specialisation: each agent has domain-specific expertise
+  + Parallel execution: tax + compliance agents run concurrently
+  + Better quality: specialist prompts produce deeper analysis
+  + Structured flow: explicit graph topology with routing logic
+
+[Stage 4 (Monolith) vs Stage 5 (Distributed A2A)]
+  +---------------------------+-------------------------------+
+  | Stage 4 (In-Process)      | Stage 5 (A2A Protocol)        |
+  +---------------------------+-------------------------------+
+  | Single process            | Multiple services (ports)     |
+  | Direct function calls     | HTTP-based A2A protocol       |
+  | Shared memory             | Message passing               |
+  | Simple deployment         | Independent scaling           |
+  | Tight coupling            | Loose coupling                |
+  | Easy to debug             | Service discovery + registry  |
+  | Good for small teams      | Good for large organisations  |
+  +---------------------------+-------------------------------+
+
+Stage 5 (this repo's main project) takes this same graph topology
+and deploys each agent as an independent A2A service. Run it with:
+  ./start_all.sh && python test_client.py
+======================================================================

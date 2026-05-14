@@ -1,0 +1,16 @@
+Connecting to Customer Agent at http://localhost:10100
+Question: If a company breaks a contract and avoids taxes, what are the legal and regulatory consequences?
+------------------------------------------------------------
+Connected to agent: Customer Agent v1.0.0
+------------------------------------------------------------
+Sending request (this may take 30-60s while agents chain)...
+
+RESPONSE:
+============================================================
+Summary based on tool outputs:
+- [delegate_to_legal_agent] Contract risk: possible compensatory damages, consequential damages, and injunctive relief.
+Tax risk: potential back taxes, civil penalties, and criminal exposure in serious cases.
+Note: educational content only, not legal advice.
+
+Recommendation: review contract, tax, compliance, and data-risk items and consult a licensed attorney before decisions.
+============================================================

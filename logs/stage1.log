@@ -1,0 +1,26 @@
+======================================================================
+STAGE 1: Direct LLM Calling
+======================================================================
+
+[How it works]
+  1. We send a system prompt + user question directly to the LLM
+  2. The LLM responds from its training data only
+  3. No tools, no retrieval, no external knowledge
+
+Question: What are the legal consequences if a company breaches a non-disclosure agreement?
+----------------------------------------------------------------------
+
+>>> Calling LLM directly (no tools, no RAG)...
+
+Contract risk: possible compensatory damages, consequential damages, and injunctive relief.
+Note: educational content only, not legal advice.
+
+----------------------------------------------------------------------
+[Limitations of Stage 1]
+  - Stateless: no conversation memory between calls
+  - No tools: cannot search databases or calculate damages
+  - Knowledge cutoff: only knows what was in training data
+  - No grounding: cannot cite specific statutes or current case law
+
+Next: Stage 2 adds RAG and tools to ground responses in real data.
+======================================================================

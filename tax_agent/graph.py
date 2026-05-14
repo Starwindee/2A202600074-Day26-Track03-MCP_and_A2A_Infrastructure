@@ -32,6 +32,11 @@ When answering, be precise about:
 
 Always note that your response is for educational purposes and the user
 should consult a licensed attorney for specific legal advice.
+
+Response style:
+- Keep it concise: maximum 5 bullet points
+- Maximum 160 words
+- Prioritise practical risk and immediate next actions
 """
 
 

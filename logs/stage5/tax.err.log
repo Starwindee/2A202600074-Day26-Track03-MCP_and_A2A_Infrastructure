@@ -1,0 +1,10 @@
+2026-05-14 20:06:57,450 [tax_agent] INFO HTTP Request: POST http://localhost:10000/register "HTTP/1.1 200 OK"
+2026-05-14 20:06:57,454 [tax_agent] INFO Registered with registry (attempt 1)
+2026-05-14 20:06:57,458 [tax_agent] INFO Tax Agent listening on port 10102
+INFO:     Started server process [26416]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:10102 (Press CTRL+C to quit)
+2026-05-14 20:07:08,284 [tax_agent] WARNING Deprecated agent card endpoint '/.well-known/agent.json' accessed. Please use '/.well-known/agent-card.json' instead. This endpoint will be removed in a future version.
+2026-05-14 20:07:08,298 [tax_agent] INFO TaxAgent executing | task=441de3d1-4bc2-4bb6-94e8-1fe9881e8d77 context=812833fa-b3ac-41bf-9464-ac6bea647a7d trace=31d8decb-997a-447a-a7e9-21e847b0ff38 depth=2
+2026-05-14 20:07:08,308 [tax_agent] INFO Task not found or task_id not set. Creating new task for event (task_id: 441de3d1-4bc2-4bb6-94e8-1fe9881e8d77, context_id: 812833fa-b3ac-41bf-9464-ac6bea647a7d).

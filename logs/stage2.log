@@ -1,0 +1,46 @@
+======================================================================
+STAGE 2: LLM + RAG / Tools
+======================================================================
+
+[How it works]
+  1. LLM receives tools (search_legal_database, calculate_damages, check_statute_of_limitations)
+  2. LLM decides which tools to call and with what arguments
+  3. We execute the tools and feed results back to the LLM
+  4. LLM generates a final answer grounded in retrieved data
+
+Question: What are the legal consequences if a company breaches a non-disclosure agreement?
+----------------------------------------------------------------------
+
+>>> Step 1: Asking LLM (with tools bound)...
+
+>>> Step 2: LLM requested 2 tool call(s):
+
+  Tool: search_legal_database
+  Args: {'query': 'What are the legal consequences if a company breaches a non-disclosure agreement?'}
+  Result: [nda_trade_secret] NDA breaches may trigger both contractual and statutory liability. Under the Defend Trade Secrets Act (DTSA, 18 U.S.C. § 1836), misappropriation of trade secrets can result in: (1) ...
+
+  Tool: check_statute_of_limitations
+  Args: {'case_type': 'contract'}
+  Result: 4 years (UCC § 2-725)
+
+>>> Step 3: LLM generating final answer with tool results...
+
+Summary based on tool outputs:
+- [tool] [nda_trade_secret] NDA breaches may trigger both contractual and statutory liability. Under the Defend Trade Secrets Act (DTSA, 18 U.S.C. § 1836), misappropriation of trade secrets can result in: (1) injunctive relief; (2) actual damages plus unjust enrichment; (3) exemplary damages up to 2x actual damages for willful misappropriation; (4) attorney's fees. State Uniform Trade Secrets Act (UTSA) versions provide additional remedies. Criminal prosecution is possible under the Economic Espionage Act (18 U.S.C. § 1832) with penalties up to $5M for individuals.
+- [tool] 4 years (UCC § 2-725)
+
+Recommendation: review contract, tax, compliance, and data-risk items and consult a licensed attorney before decisions.
+
+----------------------------------------------------------------------
+[Improvements over Stage 1]
+  + Grounded: answers cite specific statutes (DTSA, UCC, etc.)
+  + Tool use: can search databases and calculate damages
+  + More accurate: retrieval reduces hallucination risk
+
+[Limitations of Stage 2]
+  - Manual orchestration: we wrote the tool-call loop ourselves
+  - Single pass: only one round of tool calls
+  - No reasoning loop: LLM can't decide to search again if needed
+
+Next: Stage 3 wraps this in an autonomous ReAct agent loop.
+======================================================================
